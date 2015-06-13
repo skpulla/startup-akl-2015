@@ -28,14 +28,18 @@ public class MainActivity extends ActionBarActivity {
     private Beacon beacon;
     private BeaconManager beaconManager;
     private Region region;
+    private View view;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        view = this.getWindow().getDecorView();
+        view.setBackgroundColor(0xFF00FF00);
 
         region = new Region("regionid", "b9407f30-f5f8-466e-aff9-25556b57fe6d", 63429, 2793);
         beaconManager = new BeaconManager(this);
@@ -65,8 +69,7 @@ public class MainActivity extends ActionBarActivity {
         double distance = Utils.computeAccuracy(foundBeacon);
 
         if (distance > 10) {
-            View view = this.getWindow().getDecorView();
-            view.setBackgroundColor(0xFFDD0000);
+            view.setBackgroundColor(0xFFFF0000);
 
             try {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
