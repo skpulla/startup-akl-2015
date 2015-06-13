@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/estimote-sdk-preview/estimote-sdk-preview.iml" filepath="$PROJECT_DIR$/estimote-sdk-preview/estimote-sdk-preview.iml" />
       <module fileurl="file://$PROJECT_DIR$/startupup-akl-2015.iml" filepath="$PROJECT_DIR$/startupup-akl-2015.iml" />
     </modules>
   </component>
