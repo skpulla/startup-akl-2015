@@ -4,9 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
+    <TextView android:id="@+id/estimote_distance"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:padding="5dp"
+        android:background="@android:color/holo_orange_light"
+        android:textColor="@android:color/black"
+        android:text="None"
+        android:textSize="18dp"/>
 </LinearLayout>
