@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         region = new Region("regionid", "b9407f30-f5f8-466e-aff9-25556b57fe6d", 63429, 2793);
@@ -56,11 +62,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void updateDistance(Beacon foundBeacon) {
-        TextView text = (TextView) findViewById(R.id.estimote_distance);
         double distance = Utils.computeAccuracy(foundBeacon);
-        text.setText(String.format("Distance: (%.2fm)", distance));
 
         if (distance > 10) {
+            View view = this.getWindow().getDecorView();
+            view.setBackgroundColor(0xFFDD0000);
+
             try {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -93,6 +100,7 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
