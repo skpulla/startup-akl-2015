@@ -1,5 +1,6 @@
 package up.startupakl2015;
 
+import android.app.Activity;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -23,7 +24,7 @@ import com.estimote.sdk.Utils;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private Beacon beacon;
     private BeaconManager beaconManager;
@@ -34,9 +35,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         view = this.getWindow().getDecorView();
         view.setBackgroundColor(0xFF00FF00);
@@ -67,15 +65,17 @@ public class MainActivity extends ActionBarActivity {
 
     private void updateDistance(Beacon foundBeacon) {
         double distance = Utils.computeAccuracy(foundBeacon);
+        double threshold = 10;
 
-        if (distance > 10) {
+        if (distance <= threshold) {
+            view.setBackgroundColor(0xFF00FF00);
+        } else {
             view.setBackgroundColor(0xFFFF0000);
-
             try {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
-                onStop();
+//                onStop();
             } catch (Exception e) {
                 e.printStackTrace();
             }
